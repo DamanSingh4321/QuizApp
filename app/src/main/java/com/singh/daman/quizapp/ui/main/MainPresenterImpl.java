@@ -22,49 +22,53 @@ import retrofit2.Response;
  */
 
 public class MainPresenterImpl<V extends MainView> extends BasePresenterImpl<V>
-        implements MainPresenter<V>  {
+        implements MainPresenter<V> {
 
     private DataManager dataManager;
     String question;
 
     @Inject
-    public MainPresenterImpl(DataManager dataManager){
+    public MainPresenterImpl(DataManager dataManager) {
         this.dataManager = dataManager;
     }
 
     @Override
     public void getQuizData(int page, int limit) {
-      dataManager.getQuizApiCall(page, limit)
-              .subscribeOn(Schedulers.io())
-              .observeOn(AndroidSchedulers.mainThread())
-              .retry(3)
-              .subscribe(new Observer<List<QuizResponse>>() {
-                  Disposable d;
+        getView().showLoading();
+        dataManager.getQuizApiCall(page, limit)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .retry(3)
+                .subscribe(new Observer<List<QuizResponse>>() {
+                    Disposable d;
 
-                  @Override
-                  public void onSubscribe(Disposable d) {
-                      this.d = d;
-                  }
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        this.d = d;
+                    }
 
-                  @Override
-                  public void onNext(List<QuizResponse> quizResponse) {
-                      question = quizResponse.get(0).getQuestion();
-                      Log.d("daman", question);
+                    @Override
+                    public void onNext(List<QuizResponse> quizResponse) {
+                        if (quizResponse != null && quizResponse.size() > 0)
+                            getView().loadSuccess(quizResponse);
+                        else
+                            getView().loadFailure("No more questions");
 
-                  }
+                    }
 
-                  @Override
-                  public void onError(Throwable e) {
-                      Log.d("daman", e.toString());
-                      if (!d.isDisposed())
-                          d.dispose();
-                  }
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d("daman", e.toString());
+                        getView().loadFailure(e.getMessage());
+                        if (!d.isDisposed())
+                            d.dispose();
+                    }
 
-                  @Override
-                  public void onComplete() {
-                      if (!d.isDisposed())
-                          d.dispose();
-                  }
-              });
+                    @Override
+                    public void onComplete() {
+                        if (!d.isDisposed())
+                            d.dispose();
+                    }
+                });
     }
 }

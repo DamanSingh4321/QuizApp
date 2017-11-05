@@ -13,7 +13,7 @@ import com.singh.daman.quizapp.di.module.ActivityModule;
  * Created by Daman on 11/3/2017.
  */
 
-public class BaseActivity extends AppCompatActivity implements BaseMvpView{
+public class BaseActivity extends AppCompatActivity implements BaseMvpView, BaseFragment.Callback{
 
     private ActivityComponent mActivityComponent;
 
@@ -30,4 +30,13 @@ public class BaseActivity extends AppCompatActivity implements BaseMvpView{
         return mActivityComponent;
     }
 
+    @Override
+    public void onFragmentAttached() {
+
+    }
+
+    @Override
+    public void onFragmentDetached(String tag) {
+
+    }
 }

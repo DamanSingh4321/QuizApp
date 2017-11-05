@@ -1,10 +1,13 @@
 
 package com.singh.daman.quizapp.data.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class QuizResponse {
+public class QuizResponse implements Parcelable{
 
     @SerializedName("category")
     @Expose
@@ -150,5 +153,58 @@ public class QuizResponse {
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+    protected QuizResponse(Parcel in) {
+        question = in.readString();
+        option1 = in.readString();
+        option2 = in.readString();
+        option3 = in.readString();
+        option4 = in.readString();
+        answers = in.readByte() == 0x00 ? null : in.readInt();
+        id = in.readByte() == 0x00 ? null : in.readInt();
+        createdAt = in.readString();
+        updatedAt = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(question);
+        dest.writeString(option1);
+        dest.writeString(option2);
+        dest.writeString(option3);
+        dest.writeString(option4);
+        if (answers == null) {
+            dest.writeByte((byte) (0x00));
+        } else {
+            dest.writeByte((byte) (0x01));
+            dest.writeInt(answers);
+        }
+        if (id == null) {
+            dest.writeByte((byte) (0x00));
+        } else {
+            dest.writeByte((byte) (0x01));
+            dest.writeInt(id);
+        }
+        dest.writeString(createdAt);
+        dest.writeString(updatedAt);
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<QuizResponse> CREATOR = new Parcelable.Creator<QuizResponse>() {
+        @Override
+        public QuizResponse createFromParcel(Parcel in) {
+            return new QuizResponse(in);
+        }
+
+        @Override
+        public QuizResponse[] newArray(int size) {
+            return new QuizResponse[size];
+        }
+    };
 
 }

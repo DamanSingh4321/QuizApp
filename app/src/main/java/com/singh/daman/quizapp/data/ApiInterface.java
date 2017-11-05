@@ -5,7 +5,6 @@ import com.singh.daman.quizapp.data.model.QuizResponse;
 import java.util.List;
 
 import io.reactivex.Observable;
-import retrofit2.Response;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
@@ -17,4 +16,5 @@ public interface ApiInterface {
 
     @GET("questions")
     Observable<List<QuizResponse>> getQuizData(@Query("page") int page, @Query("limit") int limit);
+
 }
