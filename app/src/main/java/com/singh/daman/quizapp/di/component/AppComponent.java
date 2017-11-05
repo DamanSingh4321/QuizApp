@@ -4,8 +4,10 @@ import android.app.Application;
 import android.content.Context;
 
 import com.singh.daman.quizapp.InitApp;
+import com.singh.daman.quizapp.data.DataManager;
 import com.singh.daman.quizapp.di.annotations.ApplicationContext;
 import com.singh.daman.quizapp.di.module.AppModule;
+import com.singh.daman.quizapp.di.module.NetModule;
 
 import javax.inject.Singleton;
 
@@ -16,7 +18,7 @@ import dagger.Component;
  */
 
 @Singleton
-@Component(modules = {AppModule.class})
+@Component(modules = {AppModule.class, NetModule.class})
 public interface AppComponent {
 
     void inject(InitApp initApp);
@@ -25,4 +27,6 @@ public interface AppComponent {
     Context getContext();
 
     Application getApplication();
+
+    DataManager getDataManager();
 }

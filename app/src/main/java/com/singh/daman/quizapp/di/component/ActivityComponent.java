@@ -3,7 +3,6 @@ package com.singh.daman.quizapp.di.component;
 import com.singh.daman.quizapp.di.annotations.PerActivity;
 import com.singh.daman.quizapp.di.module.ActivityModule;
 import com.singh.daman.quizapp.ui.main.MainActivity;
-
 import dagger.Component;
 
 /**
@@ -11,7 +10,7 @@ import dagger.Component;
  */
 
 @PerActivity
-@Component(dependencies = AppComponent.class, modules = ActivityModule.class)
+@Component(modules = ActivityModule.class, dependencies = AppComponent.class)
 public interface ActivityComponent {
 
     void inject(MainActivity activity);

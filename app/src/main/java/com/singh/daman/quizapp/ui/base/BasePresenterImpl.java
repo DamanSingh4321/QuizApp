@@ -1,6 +1,5 @@
 package com.singh.daman.quizapp.ui.base;
 
-import android.view.View;
 
 /**
  * Created by Daman on 11/4/2017.

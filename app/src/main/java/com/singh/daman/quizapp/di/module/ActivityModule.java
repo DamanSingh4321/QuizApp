@@ -1,5 +1,6 @@
 package com.singh.daman.quizapp.di.module;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 
@@ -15,9 +16,9 @@ import dagger.Provides;
 @Module
 public class ActivityModule {
 
-    private AppCompatActivity appCompatActivity;
+    private Activity appCompatActivity;
 
-    public ActivityModule(AppCompatActivity appCompatActivity){
+    public ActivityModule(Activity appCompatActivity){
         this.appCompatActivity = appCompatActivity;
     }
 
@@ -28,7 +29,7 @@ public class ActivityModule {
     }
 
     @Provides
-    AppCompatActivity provideActivity() {
+    Activity provideActivity() {
         return appCompatActivity;
     }
 

@@ -22,8 +22,13 @@ public class InitApp extends Application {
         appComponent = DaggerAppComponent
                 .builder()
                 .appModule(new AppModule(this))
+                .netModule(new NetModule(this))
                 .build();
         appComponent.inject(this);
+    }
+
+    public static InitApp getApplication(Context context) {
+        return (InitApp) context.getApplicationContext();
     }
 
     public AppComponent getComponent(){

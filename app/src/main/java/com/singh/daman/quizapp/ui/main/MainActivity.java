@@ -5,31 +5,22 @@ import android.os.Bundle;
 import com.singh.daman.quizapp.R;
 import com.singh.daman.quizapp.ui.base.BaseActivity;
 
-public class MainActivity extends BaseActivity {
+import javax.inject.Inject;
+
+public class MainActivity extends BaseActivity implements MainView{
+
+    @Inject
+    MainPresenterImpl<MainView> presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        activityComponent().inject(this);
         setContentView(R.layout.activity_main);
-    }
+        presenter.onAttach(this);
 
-    @Override
-    public void showError(String error) {
-
-    }
-
-    @Override
-    public void showLoading() {
+        presenter.getQuizData(0, 10);
 
     }
 
-    @Override
-    public void hideLoading() {
-
-    }
-
-    @Override
-    public boolean isNetworkAvailable() {
-        return false;
-    }
 }

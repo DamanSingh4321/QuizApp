@@ -40,4 +40,10 @@ dependencies {
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     //RxJava
     compile 'io.reactivex.rxjava2:rxjava:2.1.5'
+    //Gson Converter
+    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+    //Retrofit Rx Adapter
+    compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    //OkHttp
+    compile 'com.squareup.okhttp3:okhttp:3.9.0'
 }
