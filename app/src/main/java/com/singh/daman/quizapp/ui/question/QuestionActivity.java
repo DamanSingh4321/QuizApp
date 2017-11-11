@@ -49,4 +49,16 @@ public class QuestionActivity extends BaseActivity {
         mViewPager.setAdapter(pagerAdapter);
     }
 
+    public int moveToNextPage(){
+        if(mViewPager.getCurrentItem() <= list.size() - 2) {
+            mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1);
+            return 0;
+        } else if(mViewPager.getCurrentItem() != list.size() - 1) {
+            mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1);
+            return 1;
+        } else{
+            return 2;
+        }
+    }
+
 }

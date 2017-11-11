@@ -8,4 +8,5 @@ import com.singh.daman.quizapp.ui.base.BaseMvpView;
  */
 
 public interface QuestionPresenter<V extends BaseMvpView> extends BaseMvpPresenter<V> {
+
 }

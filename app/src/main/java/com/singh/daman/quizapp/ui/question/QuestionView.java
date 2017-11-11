@@ -7,4 +7,5 @@ import com.singh.daman.quizapp.ui.base.BaseMvpView;
  */
 
 public interface QuestionView extends BaseMvpView {
+
 }

@@ -1,5 +1,7 @@
 package com.singh.daman.quizapp.ui.main;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -34,6 +36,11 @@ public class MainActivity extends BaseActivity implements MainView, QuizAdapter.
 
     private ArrayList<QuizResponse> list = new ArrayList<>();
     private QuizAdapter quizAdapter;
+
+    public static Intent getStartIntent(Context context) {
+        Intent intent = new Intent(context, QuestionActivity.class);
+        return intent;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

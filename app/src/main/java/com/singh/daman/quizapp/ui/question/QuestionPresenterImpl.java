@@ -19,4 +19,5 @@ public class QuestionPresenterImpl<V extends BaseMvpView> extends BasePresenterI
     public QuestionPresenterImpl(DataManager dataManager) {
         this.dataManager = dataManager;
     }
+
 }
